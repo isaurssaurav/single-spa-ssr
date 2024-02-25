@@ -28,6 +28,9 @@ app.get("/", async (req, res, next) => {
     res,
     renderFragment,
     async renderApplication({ appName, propsPromise }) {
+      console.log("appName", appName);
+      const a = await propsPromise;
+      console.log("propsPromise", a);
       const appInfo = getConfig()[appName];
 
       const [app, props] = await Promise.all([

@@ -19,6 +19,6 @@ export function serverRender(props) {
   console.log("Rendering React app");
 
   const htmlStream = renderToString(createSSRApp(App));
-
-  return { content: htmlStream };
+  const assets = `style id="jss-server-side-css">body { background:red; }</style>`;
+  return { content: htmlStream, assets };
 }

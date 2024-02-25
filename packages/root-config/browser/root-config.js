@@ -4,7 +4,7 @@ import {
   constructApplications,
   constructLayoutEngine,
 } from "single-spa-layout";
-import { getConfig } from "../mfConfig";
+import { getConfig } from "../mfConfig/index.js";
 
 const routes = constructRoutes(document.querySelector("#single-spa-layout"));
 
