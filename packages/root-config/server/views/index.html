@@ -16,10 +16,11 @@
     <template id="single-spa-layout">
       <single-spa-router>
         <route path="/">
-          <application name="@mf/vue-app" props="vue-app"></application>
+          <application name="@mf/vue-app"  props="myProp,authToken"></application>
         </route>
       </single-spa-router>
     </template>
+    <fragment name="fragment-test"></fragment>
     <script type="module" src="/client-dist/client-config.js"></script>
   </body>
 </html>

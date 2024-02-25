@@ -16,9 +16,8 @@ export const getResponseHeaders = (props) => {
  * Send App content
  */
 export function serverRender(props) {
-  console.log("Rendering React app");
-
   const htmlStream = renderToString(createSSRApp(App));
-  const assets = `style id="jss-server-side-css">body { background:red; }</style>`;
+  const assets = `<style id="jss-server-side-css">body { background:grey; }</style>`;
+  
   return { content: htmlStream, assets };
 }

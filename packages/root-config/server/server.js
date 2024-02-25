@@ -19,8 +19,14 @@ const serverLayout = constructServerLayout({
   filePath: "server/views/index.html",
 });
 
+const fragments = {
+  "fragment-test": () => "<div>Fragment test</div>",
+};
+
 app.get("/", async (req, res, next) => {
-  const renderFragment = (name) => fragments[name]();
+  const renderFragment = (name) => {
+    return fragments[name]()
+  };
 
   sendLayoutHTTPResponse({
     serverLayout,
@@ -28,9 +34,6 @@ app.get("/", async (req, res, next) => {
     res,
     renderFragment,
     async renderApplication({ appName, propsPromise }) {
-      console.log("appName", appName);
-      const a = await propsPromise;
-      console.log("propsPromise", a);
       const appInfo = getConfig()[appName];
 
       const [app, props] = await Promise.all([
@@ -40,6 +43,10 @@ app.get("/", async (req, res, next) => {
 
       return app.serverRender(props);
     },
+    /**
+     * 
+     * headers are collected from mfs and passed down to assembleFinalHeaders function below
+     */
     async retrieveApplicationHeaders({ appName, propsPromise }) {
       const appInfo = getConfig()[appName];
 
@@ -50,11 +57,23 @@ app.get("/", async (req, res, next) => {
 
       return app.getResponseHeaders(props);
     },
+    /**
+     * 
+     * Props sent from index.html is retrieved here (for e.g props="myProp,authToken")
+     */
     async retrieveProp(propName) {
+      console.log(propName,'*****propName')
       return "prop value";
     },
+    /**
+     * Should return object which is header passed to browser
+     */
     assembleFinalHeaders(allHeaders) {
-      return Object.assign({}, Object.values(allHeaders));
+      let headers = {};
+      allHeaders.forEach(({appProps, appHeaders}) => {
+        headers = {...headers, ...appHeaders}
+      })
+      return headers;
     },
   })
     .then(next)
