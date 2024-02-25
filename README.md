@@ -21,6 +21,7 @@ npm run serve
 ```
 cd package/root-config
 
+npm run serve
 ```
 
 ### 4. open `http:localhost:4000`
