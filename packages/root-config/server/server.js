@@ -62,8 +62,7 @@ app.get("/", async (req, res, next) => {
      * Props sent from index.html is retrieved here (for e.g props="myProp,authToken")
      */
     async retrieveProp(propName) {
-      console.log(propName,'*****propName')
-      return "prop value";
+      return `${propName}: fetch value from retrieveProp`;
     },
     /**
      * Should return object which is header passed to browser
