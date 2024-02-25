@@ -1,0 +1,24 @@
+{
+  "name": "mf-app-ssr-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "vite build",
+    "serve": "npm run build && node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "single-spa-vue": "^3.0.0",
+    "vue": "^3.4.19"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.1.4"
+  }
+}
