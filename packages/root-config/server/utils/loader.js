@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
-import vm from 'vm';
-import { builtinModules } from 'module';
+import fetch from "node-fetch";
+import vm from "vm";
+import { builtinModules } from "module";
 
 /**
  * @param {string} url - URL of a source code file.
@@ -11,9 +11,7 @@ async function fetchCode(url) {
   if (response.ok) {
     return response.text();
   } else {
-    throw new Error(
-      `Error fetching ${url}: ${response.statusText}`,
-    );
+    throw new Error(`Error fetching ${url}: ${response.statusText}`);
   }
 }
 
@@ -25,10 +23,7 @@ async function fetchCode(url) {
 async function createModuleFromURL(url, context) {
   const identifier = url.toString();
 
-  if (
-    url.protocol === 'http:' ||
-    url.protocol === 'https:'
-  ) {
+  if (url.protocol === "http:" || url.protocol === "https:") {
     // Download the code (naive implementation!)
     const source = await fetchCode(identifier);
     // Instantiate a ES module from raw source code.
@@ -36,7 +31,7 @@ async function createModuleFromURL(url, context) {
       identifier,
       context,
     });
-  } else if (url.protocol === 'node:') {
+  } else if (url.protocol === "node:") {
     const imported = await import(identifier);
     const exportNames = Object.keys(imported);
 
@@ -47,14 +42,12 @@ async function createModuleFromURL(url, context) {
           this.setExport(name, imported[name]);
         }
       },
-      { identifier, context },
+      { identifier, context }
     );
   } else {
     // Other possible schemes could be file: and data:
     // See https://nodejs.org/api/esm.html#esm_urls
-    throw new Error(
-      `Unsupported URL scheme: ${url.protocol}`,
-    );
+    throw new Error(`Unsupported URL scheme: ${url.protocol}`);
   }
 }
 
@@ -76,7 +69,7 @@ async function linkWithImportMap({ imports }) {
     if (builtinModules.includes(specifier)) {
       // If the specifier is a bare module specifier for a Node.js builtin,
       // a valid "node:" protocol URL is created for it.
-      url = new URL('node:' + specifier);
+      url = new URL("node:" + specifier);
     } else if (url in imports) {
       // If the specifier is contained in the import map, it is used from there.
       url = new URL(imports[specifier]);
@@ -86,15 +79,9 @@ async function linkWithImportMap({ imports }) {
       // identifier. E.g., "foo" and "https://cdn.skypack.dev/bar" will
       // resolve to "https://cdn.skypack.dev/foo". Relative specifiers
       // will also be resolved against the parent, as expected.
-      url = new URL(
-        specifier,
-        referencingModule.identifier,
-      );
+      url = new URL(specifier, referencingModule.identifier);
     }
-    return createModuleFromURL(
-      url,
-      referencingModule.context,
-    );
+    return createModuleFromURL(url, referencingModule.context);
   };
 }
 
@@ -107,14 +94,12 @@ async function linkWithImportMap({ imports }) {
 export default async function dynamicImport(
   specifier,
   sandbox = {},
-  { imports = {} } = { imports: {} },
+  { imports = {} } = { imports: {} }
 ) {
   // Take a specifier from the import map or use it directly. The
   // specifier must be a valid URL.
   const url =
-    specifier in imports
-      ? new URL(imports[specifier])
-      : new URL(specifier);
+    specifier in imports ? new URL(imports[specifier]) : new URL(specifier);
   // Create an execution context that provides global variables.
   const context = vm.createContext({ ...sandbox });
   // Create the ES module.

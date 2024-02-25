@@ -1,14 +1,14 @@
-import { createSSRApp } from 'vue'
-import { renderToString } from 'vue/server-renderer'
-import App from '../components/App.vue';
+import { createSSRApp } from "vue";
+import { renderToString } from "vue/server-renderer";
+import App from "../components/App.vue";
 
 /**
  * Send Custom headers
- * 
+ *
  */
-export const getResponseHeaders = props => {
+export const getResponseHeaders = (props) => {
   return {
-    "x-vue-app": 1
+    "x-vue-app": 1,
   };
 };
 

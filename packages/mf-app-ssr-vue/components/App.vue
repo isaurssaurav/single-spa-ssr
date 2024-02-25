@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-const greeting = ref('Hello World!222')
+import { ref } from "vue";
+const greeting = ref("Hello World!222");
 </script>
 
 <template>
