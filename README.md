@@ -1,6 +1,6 @@
 # Single SPA SSR Example
 
-![alt text](mf.png)
+![alt text](image.png)
 
 # Setup
 ```
