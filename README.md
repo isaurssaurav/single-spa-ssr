@@ -4,6 +4,10 @@
 
 # Setup
 ```
+git clone https://github.com/isaurssaurav/single-spa-ssr.git
+
+cd single-spa-ssr
+
 npm i
 ```
 ### 1. SSR Frontend setup
