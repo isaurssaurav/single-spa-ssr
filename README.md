@@ -1,5 +1,7 @@
 # Single SPA SSR Example
 
+![alt text](mf.png)
+
 # Setup
 ```
 npm i
@@ -19,7 +21,6 @@ npm run serve
 ```
 cd package/root-config
 
-npm run serve
 ```
 
 ### 4. open `http:localhost:4000`
