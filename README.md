@@ -18,8 +18,9 @@ cd packages/mf-app-ssr-vue
 
 npm run serve
 ```
+**Node and web entry point is served from `http:localhost:3000`**
 
-2. Copy the URL where the app is served and paste it to .env inside `packages/root-config`
+2. Copy the URL where the entry point is served and paste it to .env inside `packages/root-config`
 
 3. Single SPA root config setup
 
@@ -29,6 +30,5 @@ cd package/root-config
 npm run serve
 ```
 
-4. Open `http:localhost:4000`
-Here vue app is served as micro frontend.
+4. Open `http:localhost:4000`. Here, the vue app is served as micro frontend.
 
