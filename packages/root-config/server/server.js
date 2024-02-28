@@ -11,6 +11,10 @@ import { getConfig } from "../mfConfig/index.js";
 const app = express();
 const port = 4000;
 
+ 
+/**
+ * server
+ */
 app.use(express.static(path.resolve(process.cwd(), "server/dist")));
 app.set("view engine", "ejs");
 app.set("views", path.resolve(process.cwd(), "./server/views"));
