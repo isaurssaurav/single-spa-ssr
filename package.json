@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "lint:fix": "lerna run lint:fix",
-    "release": "lerna version"
+    "release": "lerna version --conventional-commits"
   },
   "dependencies": {
     "express": "^4.18.2"
